@@ -20,3 +20,22 @@ export async function getAllEmployees() {
 
   return employees;
 }
+
+export async function createEmployee(employee) {
+  await getDb();
+
+  const created = await db.run(
+    "INSERT INTO employees(code, name, surname, identity, address, telephone, photo_id) VALUES(?, ?, ?, ?, ?, ?, ?)",
+    [
+      employee["code"],
+      employee["name"],
+      employee["lastName"],
+      employee["type"],
+      employee["address"],
+      employee["phone"],
+      0
+    ]
+  );
+
+  return created;
+}
