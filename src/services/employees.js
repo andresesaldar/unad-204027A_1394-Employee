@@ -1,3 +1,4 @@
+import path from 'path';
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
 
@@ -5,8 +6,9 @@ let db = null;
 
 async function getDb() {
     if (!db) {
+        const filename = path.join(process.cwd(), 'db', 'employees.db');
         db = await open({
-          filename: "./db/employees.db",
+          filename,
           driver: sqlite3.Database,
         });
     }
